@@ -4,8 +4,8 @@ import UserName from "../features/user/UserName";
 
 function Header() {
   return (
-    <header className="w-full border-b border-yellow-100 bg-stone-100 shadow-sm shadow-yellow-700/5">
-      <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
+    <header className="w-full border-b border-yellow-100 bg-yellow-50 shadow-sm shadow-yellow-700/5">
+      <div className="mx-auto flex max-w-screen-xl items-center justify-between p-4">
         <Link
           to="/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
@@ -14,9 +14,8 @@ function Header() {
             🍕 Fast Pizza Co.
           </span>
         </Link>
-        <div className="flex gap-4 items-center">
+        <div className="flex items-center gap-4">
           <SearchOrder />
-
           <UserName />
         </div>
       </div>
