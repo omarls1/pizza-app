@@ -6,11 +6,13 @@ import DeleteItem from "../cart/DeleteItem";
 import UpdateItemQuantity from "../cart/UpdateItemQuantity";
 
 function MenuItem({ pizza }) {
-  const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
   const dispatch = useDispatch();
+
+  const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
 
   const currentQuantity = useSelector(getCurrentQuantityById(id));
   const isInCart = currentQuantity > 0;
+
   function handleAddToCart() {
     const newItem = {
       pizzaId: id,
@@ -21,19 +23,20 @@ function MenuItem({ pizza }) {
     };
     dispatch(addItem(newItem));
   }
+
   return (
     <li className="flex gap-4 py-2">
       <img
-        className={`h-24 ${soldOut ? "opacity-70 grayscale" : ""}`}
         src={imageUrl}
         alt={name}
+        className={`h-24 ${soldOut ? "opacity-70 grayscale" : ""}`}
       />
       <div className="flex grow flex-col pt-0.5">
         <p className="font-medium">{name}</p>
         <p className="text-sm capitalize italic text-stone-500">
           {ingredients.join(", ")}
         </p>
-        <div className="mt-auto flex items-center justify-between">
+        <div className="mt-auto flex items-center gap-4 md:justify-between">
           {!soldOut ? (
             <p className="text-sm">{formatCurrency(unitPrice)}</p>
           ) : (
@@ -43,14 +46,18 @@ function MenuItem({ pizza }) {
           )}
 
           {isInCart && (
-            <div className=" flex gap-3 items-center sm:gap-8">
-              <UpdateItemQuantity pizzaId={id} currentQuantity={currentQuantity} />
+            <div className="flex items-center gap-3 sm:gap-8">
+              <UpdateItemQuantity
+                pizzaId={id}
+                currentQuantity={currentQuantity}
+              />
               <DeleteItem pizzaId={id} />
             </div>
           )}
+
           {!soldOut && !isInCart && (
             <Button type="small" onClick={handleAddToCart}>
-              Add To Cart
+              Add to cart
             </Button>
           )}
         </div>
